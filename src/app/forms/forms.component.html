@@ -1,7 +1,7 @@
-<form>
-    <input type="text" placeholder="Nome" class="form-control">
-    <input type="number" placeholder="Idade" class="form-control">
-    <input type="text" placeholder="Cidade" class="form-control">
+<form [formGroup]="forms">
+    <input type="text" formControlName="name" placeholder="Nome" class="form-control">
+    <input type="number" formControlName="age" placeholder="Idade" class="form-control">
+    <input type="text" formControlName="city" placeholder="Cidade" class="form-control">
 
     <input type="button" value="Cadastrar" class="btn btn-primary">
     <input type="button" value="Alterar" class="btn btn-primary">
@@ -23,9 +23,9 @@
     <tbody>
         <tr>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{forms.value.name}}</td>
+            <td>{{forms.value.age}}</td>
+            <td>{{forms.value.city}}</td>
             <td></td>
         </tr>
     </tbody>
