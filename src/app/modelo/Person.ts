@@ -1,4 +1,4 @@
-export class Pessoa{
+export class Person{
 
     name:string;
     age:number;
