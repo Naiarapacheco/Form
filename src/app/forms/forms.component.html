@@ -29,10 +29,21 @@
     }
     <input type="text" formControlName="city" placeholder="Cidade" class="form-control">
 
-    <input type="button" value="Cadastrar" class="btn btn-primary" [disabled]="forms.invalid">
-    <input type="button" value="Alterar" class="btn btn-primary" [disabled]="forms.invalid">
-    <input type="button" value="Remover" class="btn btn-danger">
-    <input type="button" value="Cancelar" class="btn btn-primary">
+    @if (btnVisibility){
+        <input type="button" value="Cadastrar" class="btn btn-primary" 
+        (click)="register()"
+        [disabled]="forms.invalid">
+    }@else{
+        <input type="button" value="Alterar" class="btn btn-primary" 
+        (click)="update()"
+        [disabled]="forms.invalid">
+
+        <input type="button" value="Remover" class="btn btn-danger"
+        (click)="delete()">
+
+        <input type="button" value="Cancelar" class="btn btn-primary"
+        (click)="cancel()">
+    }
 </form>
 
 <table class="table">
@@ -47,12 +58,14 @@
     </thead>
 
     <tbody>
-        <tr>
-            <td></td>
-            <td>{{forms.value.name}}</td>
-            <td>{{forms.value.age}}</td>
-            <td>{{forms.value.city}}</td>
-            <td></td>
+        <tr *ngFor="let v of vetor; index as indice"> <!-- CommonModule -->
+            <td>{{indice + 1}}</td>
+            <td>{{v.name}}</td>
+            <td>{{v.age}}</td>
+            <td>{{v.city}}</td>
+            <td>
+                <button class="btn btn-primary" (click)="select(indice)">Selecionar</button>
+            </td>
         </tr>
     </tbody>
 </table>
