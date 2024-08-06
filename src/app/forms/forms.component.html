@@ -29,8 +29,8 @@
     }
     <input type="text" formControlName="city" placeholder="Cidade" class="form-control">
 
-    <input type="button" value="Cadastrar" class="btn btn-primary">
-    <input type="button" value="Alterar" class="btn btn-primary">
+    <input type="button" value="Cadastrar" class="btn btn-primary" [disabled]="forms.invalid">
+    <input type="button" value="Alterar" class="btn btn-primary" [disabled]="forms.invalid">
     <input type="button" value="Remover" class="btn btn-danger">
     <input type="button" value="Cancelar" class="btn btn-primary">
 </form>
