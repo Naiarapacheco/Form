@@ -3,6 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Person } from '../modelo/Person';
 import { CommonModule } from '@angular/common';
 
+import { SessionStorageService } from '../../services/session-storage.service';
+
 @Component({
   selector: 'app-forms',
   standalone: true,
@@ -10,6 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './forms.component.html',
   styleUrl: './forms.component.css'
 })
+
 export class FormsComponent {
 
   forms = new FormGroup({
@@ -24,11 +27,21 @@ export class FormsComponent {
   vetor:Person[] = [];
   indice:number = -1;
 
-  register(){
-    this.vetor.push(this.forms.value as Person); //cadastro no vetor
-    this.forms.reset(); //limpeza dos inputs
+  constructor(private sessionStorageService: SessionStorageService){
+    this.loadFromSessionStorage();
   }
 
+
+  register(){
+    if (this.forms.valid){
+      this.vetor.push(this.forms.value as Person); //cadastro no vetor
+      this.forms.reset(); //limpeza dos inputs
+
+      this.saveToSessionStorage();
+    } 
+  }
+
+  
   select(indice:number){
     this.indice = indice;
 
@@ -40,11 +53,16 @@ export class FormsComponent {
     this.btnVisibility = false;
   }
 
-  update(){
-    this.vetor[this.indice] = this.forms.value as Person;
-    this.forms.reset();
 
-    this.btnVisibility = true;
+  update(){
+    if (this.forms.valid){
+      this.vetor[this.indice] = this.forms.value as Person;
+      this.forms.reset();
+  
+      this.btnVisibility = true;
+
+      this.saveToSessionStorage();
+    }
   }
 
   delete(){
@@ -52,10 +70,26 @@ export class FormsComponent {
     this.forms.reset();
 
     this.btnVisibility = true;
+
+    this.saveToSessionStorage();
   }
 
   cancel(){
     this.forms.reset();
     this.btnVisibility = true;
+  }
+
+  //método para salvar o vetor no session storage
+  saveToSessionStorage(){
+    this.sessionStorageService.setItem('vetor', this.vetor);
+  }
+
+  //método para carregar o vetor do session storage
+  loadFromSessionStorage(){
+    const storedVetor = this.sessionStorageService.getItem('vetor');
+
+    if (storedVetor){
+      this.vetor = storedVetor;
+    }
   }
 }
