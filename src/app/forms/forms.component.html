@@ -1,71 +1,69 @@
+<h1>Cadastro de usuários no sistema</h1>
+
 <form [formGroup]="forms">
     <!-- Name -->
     @if(forms.get('name').hasError('required') && forms.get('name').touched){
-        <p class="alert alert-warning">O campo nome é obrigatório.</p>
+    <p class="alert alert-warning">O campo nome é obrigatório.</p>
     }
     @if(forms.get('name').hasError('minlength') && forms.get('name').touched){
-        <p class="alert alert-warning">O campo nome precisa conter pelo menos 3 caracteres.</p>
+    <p class="alert alert-warning">O campo nome precisa conter pelo menos 3 caracteres.</p>
     }
     <input type="text" formControlName="name" placeholder="Nome" class="form-control">
 
     <!-- Age -->
     @if(forms.get('age').hasError('required') && forms.get('age').touched){
-        <p class="alert alert-warning">O campo idade é obrigatório.</p>
+    <p class="alert alert-warning">O campo idade é obrigatório.</p>
     }
     @if(forms.get('age').hasError('min') && forms.get('age').touched){
-        <p class="alert alert-warning">O campo idade não aceita números inferiores a 0.</p>
+    <p class="alert alert-warning">O campo idade não aceita números inferiores a 0.</p>
     }
     @if(forms.get('age').hasError('max') && forms.get('age').touched){
-        <p class="alert alert-warning">O campo idade não aceita números superiores a 120.</p>
+    <p class="alert alert-warning">O campo idade não aceita números superiores a 120.</p>
     }
     <input type="number" formControlName="age" placeholder="Idade" class="form-control">
 
     <!-- City -->
     @if(forms.get('city').hasError('required') && forms.get('city').touched){
-        <p class="alert alert-warning">O campo cidade é obrigatório.</p>
+    <p class="alert alert-warning">O campo cidade é obrigatório.</p>
     }
     @if(forms.get('city').hasError('minlength') && forms.get('city').touched){
-        <p class="alert alert-warning">O campo cidade precisa conter pelo menos 3 caracteres.</p>
+    <p class="alert alert-warning">O campo cidade precisa conter pelo menos 3 caracteres.</p>
     }
     <input type="text" formControlName="city" placeholder="Cidade" class="form-control">
 
     @if (btnVisibility){
-        <input type="button" value="Cadastrar" class="btn btn-primary" 
-        (click)="register()"
-        [disabled]="forms.invalid">
+    <input type="button" value="Cadastrar" class="btn btn-primary" (click)="register()" [disabled]="forms.invalid">
     }@else{
-        <input type="button" value="Alterar" class="btn btn-primary" 
-        (click)="update()"
-        [disabled]="forms.invalid">
+    <input type="button" value="Alterar" class="btn btn-primary" (click)="update()" [disabled]="forms.invalid">
 
-        <input type="button" value="Remover" class="btn btn-danger"
-        (click)="delete()">
+    <input type="button" value="Remover" class="btn btn-danger" (click)="delete()">
 
-        <input type="button" value="Cancelar" class="btn btn-primary"
-        (click)="cancel()">
+    <input type="button" value="Cancelar" class="btn btn-danger" (click)="cancel()">
     }
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Cidade</th>
-            <th>Selecionar</th>
-        </tr>
-    </thead>
+<div class="container">
+    <table class="table table-success">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Cidade</th>
+                <th>Selecionar</th>
+            </tr>
+        </thead>
 
-    <tbody>
-        <tr *ngFor="let v of vetor; index as indice"> <!-- CommonModule -->
-            <td>{{indice + 1}}</td>
-            <td>{{v.name}}</td>
-            <td>{{v.age}}</td>
-            <td>{{v.city}}</td>
-            <td>
-                <button class="btn btn-primary" (click)="select(indice)">Selecionar</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+        <tbody>
+            <tr *ngFor="let v of vetor; index as indice"> <!-- CommonModule -->
+                <td>{{indice + 1}}</td>
+                <td>{{v.name}}</td>
+                <td>{{v.age}}</td>
+                <td>{{v.city}}</td>
+                <td>
+                    <button class="btn btn-success" (click)="select(indice)">Selecionar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
