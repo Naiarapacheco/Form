@@ -14,6 +14,8 @@ Este projeto Angular inclui um formulário reativo com validações para cadastr
 ## Instalação
 Clone este repositório para a sua máquina local
 <ul>
+  <li>git clone git@github.com:Naiarapacheco/Form.git</li>
+  <li>cd Form</li>
   <li>npm install - instalar as dependências</li>
   <li>ng serve - rodar o projeto</li>
 </ul>
